@@ -1,0 +1,102 @@
+/* 옵션 C 전용 스타일 */
+.miniroom-frame-c {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #f0f2fe;
+    border: 2px solid #6e76e5;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  
+  .miniroom-bg-c {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* 클릭 가능한 인터랙티브 아이템 공통 모션 */
+  .interactive-item {
+    position: absolute;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    border: 2px solid transparent;
+    border-radius: 8px;
+  }
+  
+  .interactive-item:hover {
+    transform: scale(1.08);
+    border-color: #ffcc00;
+    box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+    filter: brightness(1.1);
+  }
+  
+  /* 아이템 위치 및 스타일 */
+  .item-tv {
+    top: 18%;
+    left: 12%;
+    width: 140px;
+    height: 95px;
+    background: rgba(110, 118, 229, 0.1);
+    border-radius: 6px;
+  }
+  
+  .item-audio {
+    bottom: 20%;
+    left: 15%;
+    width: 80px;
+    height: 60px;
+    background: rgba(233, 30, 99, 0.1);
+  }
+  
+  .item-board {
+    top: 15%;
+    right: 15%;
+    width: 100px;
+    height: 120px;
+    background: rgba(255, 204, 0, 0.1);
+  }
+  
+  .item-desk {
+    bottom: 15%;
+    right: 18%;
+    width: 150px;
+    height: 100px;
+    background: rgba(76, 175, 80, 0.1);
+  }
+  
+  /* 툴팁 태그 안내 */
+  .item-tooltip {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  
+  .interactive-item:hover .item-tooltip {
+    opacity: 1;
+  }
+  
+  .interactive-guide-text {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #6e76e5;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #6e76e5;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }

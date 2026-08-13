@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EUNBI's PORTFOLIO</title>
+  <!-- 네오둥근모 웹폰트 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/neodgm/neodgm-webfont@latest/neodgm.css">
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'NeoDunggeunmo', 'Malgun Gothic', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #d3d8ec 0%, #e2d9ec 50%, #ead9e4 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ==========================================
+       1. INTRO SECTION
+       ========================================== */
+    #intro-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle, #f0f2f8 0%, #dbe0ee 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease, visibility 0.8s;
+      overflow: hidden;
+    }
+
+    .bg-deco {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.35;
+      animation: floatDeco 3s infinite alternate ease-in-out;
+      user-select: none;
+    }
+    .bg-deco-1 { top: 20%; left: 15%; animation-delay: 0s; }
+    .bg-deco-2 { top: 25%; right: 15%; animation-delay: 0.5s; }
+    .bg-deco-3 { bottom: 20%; left: 20%; animation-delay: 1s; }
+    .bg-deco-4 { bottom: 22%; right: 20%; animation-delay: 1.5s; }
+
+    @keyframes floatDeco {
+      0% { transform: translateY(0px) rotate(-5deg); }
+      100% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    .intro-stage {
+      width: 720px;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .intro-header-title {
+      font-size: 16px;
+      color: #4a53a3;
+      margin-bottom: 25px;
+      letter-spacing: 2px;
+      background: rgba(74, 83, 163, 0.08);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px dashed #4a53a3;
+    }
+
+    .skills-tracker {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 25px;
+      padding: 0 10px;
+    }
+
+    .skill-badge {
+      background: #ffffff;
+      color: #666;
+      border: 2px solid #bbb;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .skill-badge.checked {
+      background: #4a53a3;
+      color: #ffffff;
+      border-color: #3b4386;
+      box-shadow: 0 4px 12px rgba(74, 83, 163, 0.3);
+      transform: translateY(-3px);
+    }
+
+    .gauge-container {
+      width: 88%;
+      position: relative;
+      margin-bottom: 35px;
+      margin-right: 50px;
+    }
+
+    .door-portal {
+      position: absolute;
+      right: -60px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 48px;
+      z-index: 1;
+      transition: transform 0.4s ease;
+      transform-origin: left center;
+      line-height: 1;
+    }
+
+    .door-portal.open {
+      transform: translateY(-50%) scaleX(0.2) rotateY(40deg);
+    }
+
+    .runner-character {
+      position: absolute;
+      bottom: 32px;
+      left: 0%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: auto;
+      image-rendering: pixelated;
+      animation: runnerBounce 0.35s infinite alternate ease-in-out;
+      z-index: 2;
+      transition: opacity 0.5s ease;
+    }
+
+    .runner-character.enter-door {
+      animation: enterDoorAnim 0.8s forwards linear;
+    }
+
+    @keyframes enterDoorAnim {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      100% { transform: translateX(20%) scale(0.2); opacity: 0; }
+    }
+
+    @keyframes runnerBounce {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-6px); }
+    }
+
+    .loading-box {
+      width: 100%;
+      height: 28px;
+      border: 3px solid #4a53a3;
+      padding: 3px;
+      background: #ffffff;
+      position: relative;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(74, 83, 163, 0.15);
+    }
+
+    .loading-bar {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #4a53a3, #d85c83);
+      border-radius: 4px;
+    }
+
+    .loading-text {
+      color: #4a53a3;
+      font-size: 16px;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .skip-btn {
+      position: absolute;
+      bottom: 35px;
+      right: 40px;
+      background: #ffffff;
+      color: #4a53a3;
+      border: 2px solid #4a53a3;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+      z-index: 10000;
+    }
+
+    .skip-btn:hover {
+      background: #4a53a3;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(74, 83, 163, 0.3);
+    }
+
+    /* ==========================================
+       2. MAIN HOMEPAGE SECTION
+       ========================================== */
+    .wrapper {
+      display: flex;
+      gap: 0px;
+      align-items: flex-start;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      position: relative;
+    }
+
+    body.active-main .wrapper {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .bookcover {
+      background-color: #4a53a3;
+      border: 3px solid #333973;
+      border-radius: 16px;
+      padding: 16px;
+      width: 1120px;
+      height: 720px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.22);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .bookdot {
+      border: 2px dashed rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+      padding: 12px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      background-color: #fcfcfc;
+      border-radius: 8px;
+      padding: 14px;
+      border: 1px solid #666;
+      height: 100%;
+      display: flex;
+      gap: 14px;
+      position: relative;
+    }
+
+    .left-section {
+      width: 260px;
+      border: 1px solid #888;
+      border-radius: 6px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f4f5f8;
+    }
+
+    .today-box {
+      background: #e1e3ea;
+      border: 1px solid #999;
+      padding: 5px 10px;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .today-status-box {
+      font-size: 11px;
+      background: #ffffff;
+      padding: 5px 8px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      text-align: center;
+      color: #4a53a3;
+      font-weight: bold;
+    }
+
+    .profile-img-box {
+      width: 100%;
+      height: 200px;
+      border: 2px dashed #4a53a3;
+      background-color: #eef0f8;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .profile-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 8px;
+      image-rendering: pixelated;
+    }
+
+    .profile-details {
+      border-top: 1px dashed #aaa;
+      padding-top: 8px;
+      font-size: 11px;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      word-break: break-all;
+    }
+
+    .email-link {
+      color: #4a53a3;
+      text-decoration: underline;
+      font-weight: bold;
+      transition: color 0.2s ease;
+    }
+
+    .email-link:hover {
+      color: #d85c83;
+    }
+
+    .tools-title {
+      font-size: 11px;
+      font-weight: bold;
+      color: #4a53a3;
+      margin-top: 4px;
+    }
+
+    .tools-icon-box {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .tool-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 4px;
+      opacity: 0.9;
+      transition: opacity 0.2s ease;
+    }
+
+    .tool-icon:hover {
+      opacity: 1;
+    }
+
+    .shortcut-select {
+      width: 100%;
+      padding: 6px;
+      font-size: 12px;
+      border: 1px solid #888;
+      margin-top: auto;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .right-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      overflow: hidden;
+    }
+
+    .top-header-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .top-message-bar {
+      flex: 1;
+      border: 1px solid #888;
+      padding: 10px 12px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      color: #222;
+      background: #fff;
+      border-radius: 4px;
+    }
+
+    .bgm-player-box {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #eef0f8;
+      border: 1px solid #4a53a3;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .bgm-select {
+      font-size: 11px;
+      color: #4a53a3;
+      font-weight: bold;
+      border: 1px solid #4a53a3;
+      border-radius: 12px;
+      padding: 3px 6px;
+      background: #ffffff;
+      outline: none;
+      cursor: pointer;
+      max-width: 180px;
+    }
+
+    .bgm-btn {
+      background: #4a53a3;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 4px 10px;
+      font-size: 11px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .bgm-btn:hover {
+      background: #d85c83;
+    }
+
+    .main-content-box {
+      flex: 1;
+      border: 1px solid #888;
+      border-radius: 4px;
+      background: #fff;
+      position: relative;
+      overflow-y: auto;
+      padding: 16px;
+    }
+
+    .tab-content {
+      display: none;
+      width: 100%;
+      height: 100%;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* ==========================================
+       RESIZED COMPACT MINIROOM STYLING
+       ========================================== */
+    .miniroom-frame-c {
+      width: 100%;
+      max-width: 640px; /* 미니룸 크기 축소 */
+      height: 380px;    /* 미니룸 높이 축소 */
+      margin: 0 auto;
+      position: relative;
+      background: #f2f3f7;
+      border: 1px solid #dcdfe6;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .miniroom-bg-c {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .interactive-item {
+      position: absolute;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: 2px dashed transparent;
+      border-radius: 8px;
+    }
+
+    .interactive-item:hover {
+      transform: scale(1.05);
+      border-color: #ffcc00;
+      box-shadow: 0 0 15px rgba(255, 204, 0, 0.8);
+    }
+
+    /* 미니룸 크기 축소에 맞춘 핫스팟 좌표 */
+    .item-mirror {
+      top: 38%;
+      left: 8%;
+      width: 90px;
+      height: 90px;
+    }
+
+    .item-desk {
+      bottom: 12%;
+      right: 28%;
+      width: 105px;
+      height: 85px;
+    }
+
+    .item-board {
+      top: 22%;
+      right: 23%;
+      width: 70px;
+      height: 75px;
+    }
+
+    .item-bed {
+      top: 28%;
+      left: 36%;
+      width: 170px;
+      height: 110px;
+    }
+
+    .item-tooltip {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #333333;
+      color: #ffffff;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      z-index: 10;
+    }
+
+    .interactive-item:hover .item-tooltip {
+      opacity: 1;
+    }
+
+    .interactive-guide-text {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(74, 83, 163, 0.85);
+      color: #ffffff;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      letter-spacing: 0.5px;
+      z-index: 10;
+    }
+
+    .project-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .project-card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 14px;
+      background-color: #fafafa;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .project-title {
+      font-size: 15px;
+      font-weight: bold;
+      color: #4a53a3;
+      margin-bottom: 4px;
+    }
+
+    .project-subtitle {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 10px;
+      font-weight: normal;
+    }
+
+    .video-preview-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .video-preview-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    .storyboard-preview-box {
+      width: 100%;
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      display: none;
+    }
+
+    .storyboard-preview-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(74, 83, 163, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover .hover-overlay {
+      opacity: 1;
+    }
+
+    .navigation-tabs {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: absolute;
+      right: -72px;
+      top: 110px;
+    }
+
+    .nav-btn {
+      background: #d85c83;
+      color: white;
+      border: 1px solid #a33f5f;
+      padding: 12px 14px;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      font-size: 13px;
+      width: 72px;
+      text-align: center;
+      transition: background 0.2s;
+    }
+
+    .nav-btn.active {
+      background: #ffffff;
+      color: #222;
+      border-left: 1px solid transparent;
+      font-weight: bold;
+    }
+
+    /* ==========================================
+       3. MODAL POPUP & TAB TOGGLE
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      z-index: 10000;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(3px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      width: 900px;
+      max-width: 92vw;
+      max-height: 90vh;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 3px solid #4a53a3;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .modal-window.full-mode {
+      width: 100vw !important;
+      height: 100vh !important;
+      max-width: 100vw !important;
+      max-height: 100vh !important;
+      border-radius: 0 !important;
+      border: none !important;
+    }
+
+    .modal-header {
+      background: #4a53a3;
+      color: white;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .modal-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .fullmode-btn {
+      background: #ffcc00;
+      color: #333;
+      border: 1px solid #e6b800;
+      padding: 5px 14px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+    }
+
+    .fullmode-btn:hover {
+      background: #ffe066;
+      transform: scale(1.03);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 0 4px;
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      transform: scale(1.2);
+    }
+
+    .modal-toggle-bar {
+      display: flex;
+      gap: 8px;
+      background: #eef0f8;
+      padding: 10px 18px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .modal-toggle-btn {
+      background: #ffffff;
+      color: #4a53a3;
+      border: 1px solid #4a53a3;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .modal-toggle-btn.active {
+      background: #4a53a3;
+      color: #ffffff;
+    }
+
+    .modal-body {
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .modal-tab-content {
+      display: none;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .modal-tab-content.active {
+      display: flex;
+    }
+
+    .modal-video-box {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-video-box video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-section-title {
+      font-size: 14px;
+      color: #4a53a3;
+      font-weight: bold;
+      border-bottom: 2px solid #4a53a3;
+      padding-bottom: 4px;
+      margin-top: 4px;
+    }
+
+    .modal-desc {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .storyboard-img {
+      width: 100%;
+      height: auto;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+    }
+
+    /* ==========================================
+       4. MOBILE & TABLET RESPONSIVE MEDIA QUERIES
+       ========================================== */
+    @media (max-width: 1150px) {
+      body {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding: 20px 10px;
+      }
+
+      .wrapper {
+        width: 100%;
+        max-width: 768px;
+        margin: 0 auto;
+      }
+
+      .bookcover {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        padding: 12px;
+      }
+
+      .page {
+        flex-direction: column;
+        height: auto;
+        gap: 16px;
+      }
+
+      .left-section {
+        width: 100%;
+      }
+
+      .right-section {
+        width: 100%;
+        height: auto;
+        overflow: visible;
+      }
+
+      .main-content-box {
+        min-height: 420px;
+      }
+
+      .navigation-tabs {
+        position: static;
+        flex-direction: row;
+        width: 100%;
+        margin-top: 10px;
+        justify-content: space-between;
+      }
+
+      .nav-btn {
+        width: 100%;
+        border-radius: 6px;
+        padding: 10px 4px;
+        font-size: 12px;
+      }
+
+      .nav-btn.active {
+        border-left: 1px solid #a33f5f;
+        border-bottom: 2px solid #4a53a3;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .top-header-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .bgm-player-box {
+        justify-content: center;
+      }
+
+      .skills-tracker {
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .skill-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .miniroom-frame-c {
+        height: 260px;
+      }
+
+      .interactive-guide-text {
+        font-size: 10px;
+        padding: 4px 8px;
+      }
+
+      .modal-body {
+        padding: 14px;
+      }
+
+      .skip-btn {
+        bottom: 20px;
+        right: 20px;
+        padding: 8px 14px;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BGM 오디오 객체 (기본: 에픽하이) -->
+  <audio id="bgm-audio" preload="auto" onended="playNextTrack()">
+    <source id="bgm-source" src="src/에픽하이 (EPIK HIGH) - Love Love Love (Feat. Yoong Jin Of Casker).m4a" type="audio/mp4">
+  </audio>
+
+  <!-- ==================== 1. 인트로 ==================== -->
+  <div id="intro-screen">
+    <div class="bg-deco bg-deco-1">✨</div>
+    <div class="bg-deco bg-deco-2">👾</div>
+    <div class="bg-deco bg-deco-3">💫</div>
+    <div class="bg-deco bg-deco-4">⭐</div>
+
+    <div class="intro-stage">
+      <div class="intro-header-title">✦ EUNBI'S SKILL LOADING ✦</div>
+      
+      <div class="skills-tracker">
+        <div id="skill-ae" class="skill-badge"><span class="check-icon">☐</span> 애펙</div>
+        <div id="skill-pr" class="skill-badge"><span class="check-icon">☐</span> 프리미어</div>
+        <div id="skill-blender" class="skill-badge"><span class="check-icon">☐</span> 블렌더</div>
+        <div id="skill-ps" class="skill-badge"><span class="check-icon">☐</span> 포토샵</div>
+        <div id="skill-ai" class="skill-badge"><span class="check-icon">☐</span> 일러스트</div>
+      </div>
+
+      <div class="gauge-container">
+        <img id="runner-char" src="src/캐릭터.png" class="runner-character" alt="캐릭터">
+        
+        <div class="loading-box">
+          <div id="gauge-bar" class="loading-bar"></div>
+        </div>
+
+        <div id="door-portal" class="door-portal">🚪</div>
+      </div>
+
+      <div id="gauge-text" class="loading-text">스킬 충전 중... (0%)</div>
+
+    </div>
+
+    <button class="skip-btn" onclick="skipIntro()">SKIP ⏩</button>
+  </div>
+
+
+  <!-- ==================== 2. 메인 미니홈피 ==================== -->
+  <div class="wrapper">
+    <div class="bookcover">
+      <div class="bookdot">
+        <div class="page">
+          
+          <!-- [좌측] 프로필 영역 -->
+          <div class="left-section">
+            <div class="today-box">
+              Today.. <span style="color:#d85c83; font-weight: bold;">0708</span> | Total 1999
+            </div>
+
+            <!-- TODAY IS 상태창 -->
+            <div class="today-status-box">
+              TODAY IS... 🔥 열정 가득
+            </div>
+            
+            <div class="profile-img-box">
+              <img src="src/캐릭터.png" alt="프로필 아바타">
+            </div>
+
+            <div class="profile-details">
+              <div class="info-item">🎂 최은비 (EUNBI)</div>
+              <div class="info-item">🏠 Motion Designer</div>
+              <div class="info-item">📞 010-7605-5460</div>
+              <div class="info-item">
+                ✉️ <a href="mailto:choieunbi078@gmail.com" class="email-link" title="메일 보내기">choieunbi078@gmail.com</a>
+              </div>
+              
+              <!-- 툴 아이콘 세트 -->
+              <div class="tools-title">🛠️ TOOL SKILLS</div>
+              <div class="tools-icon-box">
+                <img src="src/애펙.png" class="tool-icon" alt="After Effects" title="After Effects">
+                <img src="src/프리미어 프로.png" class="tool-icon" alt="Premiere Pro" title="Premiere Pro">
+                <img src="src/블렌더.png" class="tool-icon" alt="Blender" title="Blender">
+                <img src="src/포토샵.png" class="tool-icon" alt="Photoshop" title="Photoshop">
+                <img src="src/일러스트.png" class="tool-icon" alt="Illustrator" title="Illustrator">
+              </div>
+            </div>
+
+            <select class="shortcut-select" onchange="handleShortcut(this.value)">
+              <option value="">바로가기</option>
+              <option value="all">전체 보기</option>
+              <option value="video">영상만 보기</option>
+              <option value="storyboard">스토리보드만 보기</option>
+            </select>
+          </div>
+
+          <!-- [우측] 메인 콘텐츠 영역 -->
+          <div class="right-section">
+            <div class="top-header-bar">
+              <!-- 요청하신 상단 멘트 수정 적용 -->
+              <div class="top-message-bar">
+                상상을 렌더링하는 중... 💾
+              </div>
+              
+              <!-- BGM 위젯 (에픽하이 - 빅뱅 - 프리스타일 순서 적용) -->
+              <div class="bgm-player-box">
+                <span>🎵 BGM:</span>
+                <select id="bgm-select" class="bgm-select" onchange="changeBGMTrack(this.value)">
+                  <option value="0">1. 에픽하이 - Love Love Love</option>
+                  <option value="1">2. 빅뱅 - Cafe</option>
+                  <option value="2">3. 프리스타일 - Y</option>
+                </select>
+                <button id="bgm-toggle-btn" class="bgm-btn" onclick="toggleBGM()">▶ 재생</button>
+              </div>
+            </div>
+
+            <div class="main-content-box">
+              
+              <!-- TAB 1: About (사이즈 축소 적용) -->
+              <div id="tab-about" class="tab-content active">
+                <div class="miniroom-frame-c">
+                  <img src="src/다운로드 (2).jpg" class="miniroom-bg-c" alt="미니룸 배경">
+
+                  <!-- 1. 화장대/거울 영역 -->
+                  <div class="interactive-item item-mirror" onclick="openModal('kinolights')">
+                    <div class="item-tooltip">📺 대표 영상 보러가기</div>
+                  </div>
+
+                  <!-- 2. 침대 영역 -->
+                  <div class="interactive-item item-bed" onclick="toggleBGM()">
+                    <div class="item-tooltip">📻 BGM 켜기/끄기</div>
+                  </div>
+
+                  <!-- 3. 게시판 영역 -->
+                  <div class="interactive-item item-board" onclick="switchTab('tab-board', document.querySelectorAll('.nav-btn')[3])">
+                    <div class="item-tooltip">📝 방명록 쓰러가기</div>
+                  </div>
+
+                  <!-- 4. 데스크탑/책상 영역 -->
+                  <div class="interactive-item item-desk" onclick="switchTab('tab-career', document.querySelectorAll('.nav-btn')[2])">
+                    <div class="item-tooltip">💻 경력/이력서 보기</div>
+                  </div>
+
+                  <div class="interactive-guide-text">
+                    🕹️ CLICKABLE MINIROOM
+                  </div>
+                </div>
+              </div>
+
+              <!-- TAB 2: Project -->
+              <div id="tab-project" class="tab-content">
+                <div class="project-grid">
+                  
+                  <!-- 1. 키노라이츠 -->
+                  <div class="project-card" onclick="openModal('kinolights')">
+                    <div class="project-title">🎬 Kinolights App Promotion</div>
+                    <div class="project-subtitle">기획, 스토리보드, 디자인 및 애니메이션 제작 (100%)</div>
+                    <div class="video-preview-box">
+                      <video muted loop preload="metadata">
+                        <source src="src/키노라이츠 앱 홍보.mp4" type="video/mp4">
+                      </video>
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                    <div class="storyboard-preview-box">
+                      <img src="src/storyboard.png" alt="Kinolights 스토리보드">
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Greenish AI 향수 광고 -->
+                  <div class="project-card" onclick="openModal('greenish')">
+                    <div class="project-title">🎬 Greenish AI 향수 광고</div>
+                    <div class="project-subtitle">기획, 스토리보드, 디자인 및 AI 활용 (100%)</div>
+                    <div class="video-preview-box">
+                      <video muted loop preload="metadata">
+                        <source src="src/Greenish AI 향수 광고.mp4" type="video/mp4">
+                      </video>
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                    <div class="storyboard-preview-box">
+                      <img src="src/향수 광고 스토리 보드.jpg" alt="Greenish AI 스토리보드">
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                  </div>
+
+                  <!-- 3. 다마고치 영상 -->
+                  <div class="project-card" onclick="openModal('tamagotchi')">
+                    <div class="project-title">🎬 Tamagotchi Promotion</div>
+                    <div class="project-subtitle">기획, 스토리보드, 캐릭터 디자인 및 모션 그래픽</div>
+                    <div class="video-preview-box">
+                      <video muted loop preload="metadata">
+                        <source src="src/다마고치.mp4" type="video/mp4">
+                      </video>
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                    <div class="storyboard-preview-box">
+                      <img src="src/storyboard.png" alt="Tamagotchi 스토리보드">
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                  </div>
+
+                  <!-- 4. 게즈 광고 영상 -->
+                  <div class="project-card" onclick="openModal('guess')">
+                    <div class="project-title">🎬 Guess Brand Promotion (Team Project)</div>
+                    <div class="project-subtitle">팀 프로젝트 / 모션 그래픽 & 비주얼 연출</div>
+                    <div class="video-preview-box">
+                      <video muted loop preload="metadata">
+                        <source src="src/게즈 광고영상.mp4" type="video/mp4">
+                      </video>
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                    <div class="storyboard-preview-box">
+                      <img src="src/storyboard.png" alt="Guess 스토리보드">
+                      <div class="hover-overlay">🔍 클릭하여 크게 보기</div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- TAB 3: Career -->
+              <div id="tab-career" class="tab-content">
+                <h3>CAREER</h3>
+                <p style="margin-top: 10px; font-size: 13px;">Motion Graphic Designer & Animator</p>
+              </div>
+
+              <!-- TAB 4: Board -->
+              <div id="tab-board" class="tab-content">
+                <h3>BOARD</h3>
+                <p style="margin-top: 10px; font-size: 13px;">방명록 영역입니다.</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- 탭 메뉴 -->
+          <div class="navigation-tabs">
+            <button class="nav-btn active" onclick="switchTab('tab-about', this)">About</button>
+            <button class="nav-btn" onclick="switchTab('tab-project', this)">Project</button>
+            <button class="nav-btn" onclick="switchTab('tab-career', this)">Career</button>
+            <button class="nav-btn" onclick="switchTab('tab-board', this)">Board</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== 3. MODAL POPUP & TAB TOGGLE ==================== -->
+  <div id="project-modal" class="modal-overlay" onclick="closeModalOnOuterClick(event)">
+    <div id="modal-window" class="modal-window">
+      <div class="modal-header">
+        <span id="modal-title">Project Title</span>
+        
+        <div class="modal-header-actions">
+          <button id="fullmode-btn" class="fullmode-btn" onclick="toggleFullMode()">
+            FullMode ⛶
+          </button>
+          <button class="modal-close-btn" onclick="closeModal()">✖</button>
+        </div>
+      </div>
+
+      <!-- 영상 / 스토리보드 토글 바 -->
+      <div class="modal-toggle-bar">
+        <button id="btn-modal-video" class="modal-toggle-btn active" onclick="switchModalTab('video')">🎬 영상 보기</button>
+        <button id="btn-modal-storyboard" class="modal-toggle-btn" onclick="switchModalTab('storyboard')">🎨 스토리보드 보기</button>
+      </div>
+      
+      <div class="modal-body">
+        <!-- TAB 1: 동영상 및 개요 -->
+        <div id="modal-tab-video" class="modal-tab-content active">
+          <div class="modal-video-box">
+            <video id="modal-video" controls autoplay>
+              <source id="modal-video-src" src="" type="video/mp4">
+            </video>
+          </div>
+          <div class="modal-section-title">📌 프로젝트 개요</div>
+          <div id="modal-desc" class="modal-desc">개요 설명 내용</div>
+        </div>
+
+        <!-- TAB 2: 스토리보드 -->
+        <div id="modal-tab-storyboard" class="modal-tab-content">
+          <div class="modal-section-title">🎨 스토리보드 상세</div>
+          <img id="modal-storyboard" class="storyboard-img" src="" alt="스토리보드">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ==================== JavaScript ==================== -->
+  <script>
+    const skills = [
+      { id: 'skill-ae', label: '애펙', pct: 20 },
+      { id: 'skill-pr', label: '프리미어', pct: 40 },
+      { id: 'skill-blender', label: '블렌더', pct: 60 },
+      { id: 'skill-ps', label: '포토샵', pct: 80 },
+      { id: 'skill-ai', label: '일러스트', pct: 100 }
+    ];
+
+    let progress = 0;
+    const duration = 3000;
+    const intervalTime = 30;
+    const increment = 100 / (duration / intervalTime);
+
+    const gaugeBar = document.getElementById('gauge-bar');
+    const runnerChar = document.getElementById('runner-char');
+    const gaugeText = document.getElementById('gauge-text');
+    const doorPortal = document.getElementById('door-portal');
+
+    const progressTimer = setInterval(() => {
+      progress += increment;
+      if (progress > 100) progress = 100;
+
+      gaugeBar.style.width = progress + '%';
+      runnerChar.style.left = progress + '%';
+      gaugeText.innerText = `스킬 충전 중... (${Math.floor(progress)}%)`;
+
+      skills.forEach(skill => {
+        if (progress >= skill.pct) {
+          const badge = document.getElementById(skill.id);
+          if (!badge.classList.contains('checked')) {
+            badge.classList.add('checked');
+            badge.innerHTML = `<span class="check-icon">☑</span> ${skill.label}`;
+          }
+        }
+      });
+
+      if (progress >= 100) {
+        clearInterval(progressTimer);
+        finishIntroAnimation();
+      }
+    }, intervalTime);
+
+    function finishIntroAnimation() {
+      gaugeText.innerText = "은비의 미니홈피로 입장합니다!";
+      doorPortal.classList.add('open');
+
+      setTimeout(() => {
+        runnerChar.classList.add('enter-door');
+      }, 200);
+
+      setTimeout(() => {
+        enterMainPage();
+      }, 1000);
+    }
+
+    function skipIntro() {
+      clearInterval(progressTimer);
+      skills.forEach(skill => {
+        const badge = document.getElementById(skill.id);
+        badge.classList.add('checked');
+        badge.innerHTML = `<span class="check-icon">☑</span> ${skill.label}`;
+      });
+      gaugeBar.style.width = '100%';
+      runnerChar.style.left = '100%';
+      finishIntroAnimation();
+    }
+
+    function enterMainPage() {
+      const introScreen = document.getElementById('intro-screen');
+      introScreen.style.opacity = '0';
+      introScreen.style.visibility = 'hidden';
+      document.body.classList.add('active-main');
+
+      bgmAudio.play().then(() => {
+        bgmBtn.innerText = '❚❚ 정지';
+      }).catch(err => {
+        console.log("브라우저 자동재생 정책으로 인해 클릭 후 재생될 수 있습니다.");
+      });
+    }
+
+    /* BGM 멀티 플레이리스트 (에픽하이 -> 빅뱅 -> 프리스타일) */
+    const playlist = [
+      { name: "1. 에픽하이 - Love Love Love", src: "src/에픽하이 (EPIK HIGH) - Love Love Love (Feat. Yoong Jin Of Casker).m4a" },
+      { name: "2. 빅뱅 - Cafe", src: "src/빅뱅 - cafe.m4a" },
+      { name: "3. 프리스타일 - Y", src: "src/Free Style(프리스타일) - Y (Please Tell Me Why).m4a" }
+    ];
+
+    let currentTrackIndex = 0;
+    const bgmAudio = document.getElementById('bgm-audio');
+    const bgmSource = document.getElementById('bgm-source');
+    const bgmBtn = document.getElementById('bgm-toggle-btn');
+    const bgmSelect = document.getElementById('bgm-select');
+
+    function toggleBGM() {
+      if (bgmAudio.paused) {
+        bgmAudio.play().then(() => {
+          bgmBtn.innerText = '❚❚ 정지';
+        }).catch(err => {
+          console.log("자동 재생 제한 정책으로 인해 사용자 클릭이 필요합니다.");
+        });
+      } else {
+        bgmAudio.pause();
+        bgmBtn.innerText = '▶ 재생';
+      }
+    }
+
+    function changeBGMTrack(index) {
+      currentTrackIndex = parseInt(index);
+      bgmSource.src = playlist[currentTrackIndex].src;
+      bgmAudio.load();
+      bgmAudio.play().then(() => {
+        bgmBtn.innerText = '❚❚ 정지';
+      }).catch(err => {
+        console.log("재생 오류 발생");
+      });
+    }
+
+    function playNextTrack() {
+      currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+      bgmSelect.value = currentTrackIndex;
+      changeBGMTrack(currentTrackIndex);
+    }
+
+    /* 바로가기 필터링 로직 */
+    function handleShortcut(val) {
+      if (!val) return;
+
+      const projectNavBtn = document.querySelectorAll('.nav-btn')[1];
+      switchTab('tab-project', projectNavBtn);
+
+      const videoBoxes = document.querySelectorAll('.video-preview-box');
+      const storyboardBoxes = document.querySelectorAll('.storyboard-preview-box');
+
+      if (val === 'video') {
+        videoBoxes.forEach(box => box.style.display = 'block');
+        storyboardBoxes.forEach(box => box.style.display = 'none');
+      } else if (val === 'storyboard') {
+        videoBoxes.forEach(box => box.style.display = 'none');
+        storyboardBoxes.forEach(box => box.style.display = 'block');
+      } else if (val === 'all') {
+        videoBoxes.forEach(box => box.style.display = 'block');
+        storyboardBoxes.forEach(box => box.style.display = 'block');
+      }
+    }
+
+    /* 📌 프로젝트 데이터 정의 */
+    const projectData = {
+      kinolights: {
+        title: "🎬 Kinolights App Promotion",
+        videoSrc: "src/키노라이츠 앱 홍보.mp4",
+        desc: "키노라이츠 앱의 주요 기능과 UX/UI 직관성을 강조하기 위한 모션 그래픽 프로모션 영상입니다. 다채로운 그래픽 연출과 경쾌한 모션을 통해 브랜드 이미지를 효과적으로 전달합니다.",
+        storyboardSrc: "src/storyboard.png"
+      },
+      greenish: {
+        title: "🎬 Greenish AI 향수 광고",
+        videoSrc: "src/Greenish AI 향수 광고.mp4",
+        desc: "Greenish AI 브랜드의 프리미엄 감성을 고스란히 담아낸 3D/2D 혼합 모션 그래픽 향수 광고 영상입니다. 은은하고 고급스러운 분위기와 타이포그래피 모션 연출이 특징입니다.",
+        storyboardSrc: "src/향수 광고 스토리 보드.jpg"
+      },
+      tamagotchi: {
+        title: "🎬 Tamagotchi Promotion",
+        videoSrc: "src/다마고치.mp4",
+        desc: "레트로 다마고치 감성을 귀여운 캐릭터 연출과 픽셀 모션 그래픽으로 담아낸 영상 프로모션 프로젝트입니다.",
+        storyboardSrc: "src/storyboard.png"
+      },
+      guess: {
+        title: "🎬 Guess Brand Promotion (Team Project)",
+        videoSrc: "src/게즈 광고영상.mp4",
+        desc: "게즈(Guess) 브랜드 프로모션을 위해 진행된 팀 프로젝트 모션 그래픽 영상입니다. 감각적인 트랜지션 연출과 스타일리시한 비주얼 기획을 담당하였습니다.",
+        storyboardSrc: "src/storyboard.png"
+      }
+    };
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+      
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    /* 모달 탭 전환 함수 */
+    function switchModalTab(type) {
+      const videoTab = document.getElementById('modal-tab-video');
+      const storyboardTab = document.getElementById('modal-tab-storyboard');
+      const btnVideo = document.getElementById('btn-modal-video');
+      const btnStoryboard = document.getElementById('btn-modal-storyboard');
+      const video = document.getElementById('modal-video');
+
+      if (type === 'video') {
+        videoTab.classList.add('active');
+        storyboardTab.classList.remove('active');
+        btnVideo.classList.add('active');
+        btnStoryboard.classList.remove('active');
+        
+        if (video) {
+          video.play().catch(err => console.log("재생 오류"));
+        }
+      } else {
+        storyboardTab.classList.add('active');
+        videoTab.classList.remove('active');
+        btnStoryboard.classList.add('active');
+        btnVideo.classList.remove('active');
+        
+        if (video) {
+          video.pause();
+        }
+      }
+    }
+
+    /* 모달 열기 함수 */
+    function openModal(key) {
+      if (!bgmAudio.paused) {
+        bgmAudio.pause();
+        bgmBtn.innerText = '▶ 재생';
+      }
+
+      const data = projectData[key];
+      if (!data) return;
+
+      document.getElementById('modal-title').innerText = data.title;
+      document.getElementById('modal-desc').innerText = data.desc;
+      document.getElementById('modal-storyboard').src = data.storyboardSrc;
+
+      const video = document.getElementById('modal-video');
+      const videoSrc = document.getElementById('modal-video-src');
+      
+      videoSrc.src = data.videoSrc;
+      video.load();
+      video.muted = false;
+
+      switchModalTab('video');
+
+      document.getElementById('project-modal').classList.add('active');
+
+      const modalBody = document.querySelector('.modal-body');
+      if (modalBody) {
+        modalBody.scrollTop = 0;
+      }
+
+      video.play().catch(err => {
+        console.log("자동 재생 정책으로 인해 사용자의 직접 클릭이 필요할 수 있습니다.");
+      });
+    }
+
+    function toggleFullMode() {
+      const modalWindow = document.getElementById('modal-window');
+      const fullBtn = document.getElementById('fullmode-btn');
+
+      if (modalWindow.classList.contains('full-mode')) {
+        modalWindow.classList.remove('full-mode');
+        fullBtn.innerHTML = 'FullMode ⛶';
+      } else {
+        modalWindow.classList.add('full-mode');
+        fullBtn.innerHTML = 'NormalMode 🗗';
+      }
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('project-modal');
+      const modalWindow = document.getElementById('modal-window');
+      const fullBtn = document.getElementById('fullmode-btn');
+      const video = document.getElementById('modal-video');
+      
+      video.pause();
+      video.currentTime = 0;
+      
+      modalWindow.classList.remove('full-mode');
+      fullBtn.innerHTML = 'FullMode ⛶';
+      
+      modal.classList.remove('active');
+    }
+
+    function closeModalOnOuterClick(event) {
+      if (event.target.id === 'project-modal') {
+        closeModal();
+      }
+    }
+  </script>
+</body>
+</html>
